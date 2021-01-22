@@ -10,10 +10,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-    new HtmlWebpackPlugin({
-      template: "index.html",
-      filename: '../index.html'
-    })
+    // new HtmlWebpackPlugin({
+    //   template: "index.html",
+    //   filename: '../index.html'
+    // })
   ],
   module: {
     rules: [
