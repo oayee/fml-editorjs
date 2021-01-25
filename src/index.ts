@@ -3,6 +3,7 @@ import Div from './div/div';
 import TextInput from './text-input/text-input';
 import TextAreaInput from './text-area-input/text-area-input';
 import InputFile from './input-file/input-file';
+import InlineTextInput from './inline-text-input';
 
 const List = require('@editorjs/list');
 const Checklist = require('@editorjs/checklist');
@@ -14,6 +15,7 @@ function init() {
     defaultBlock: 'customDiv',
     placeholder: 'Custom placeholder',
     tools: {
+      marker: InlineTextInput,
       customDiv: {
         class: Div,
         inlineToolbar: true,

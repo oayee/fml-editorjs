@@ -1,7 +1,7 @@
 import { BlockTool, BlockToolData } from '@editorjs/editorjs';
+import { make } from '../div/utils';
 
 export default class TextInput implements BlockTool {
-
   static get toolbox() {
     return {
       title: 'Text Input',
@@ -12,8 +12,24 @@ export default class TextInput implements BlockTool {
     };
   }
 
+  static get conversionConfig() {
+    return {
+      export: 'text', // to convert Paragraph to other block, use 'text' property of saved data
+      import: 'text' // to covert other block's exported string to Paragraph, fill 'text' property of tool data
+    };
+  }
+
+  constructor({ data }: any) {
+    this.data = data || {};
+  }
+
+  private input: HTMLInputElement | undefined;
+  private data: { [key: string]: string };
+
   render(): HTMLElement {
-    return document.createElement('input');
+    this.input = make('input', '', {}, { 'type': 'text' });
+    this.input.placeholder = this.data.text;
+    return this.input;
   }
 
   save(block: HTMLInputElement): BlockToolData {

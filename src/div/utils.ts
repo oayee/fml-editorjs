@@ -1,7 +1,7 @@
 export type Position = { x: string, y: string };
 
-export const make = (tag: string, classes: string[] | string | null = null, styles: { [key: string]: string } = {}, attrs: { [key: string]: string | boolean } = {}) => {
-  const el: HTMLElement = document.createElement(tag);
+export const make = <T extends keyof HTMLElementTagNameMap>(tag: T, classes: string[] | string | null = null, styles: { [key: string]: string } = {}, attrs: { [key: string]: string | boolean } = {}): HTMLElementTagNameMap[T] => {
+  const el: HTMLElementTagNameMap[T] = document.createElement(tag);
 
   if (Array.isArray(classes)) {
     el.classList.add(...classes);
