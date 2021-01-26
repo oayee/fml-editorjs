@@ -37,3 +37,44 @@ export const getCaretCoordinates = (): Position => {
   }
   return { x, y };
 };
+
+export function extractContentAfterCaret() {
+  const input = document.activeElement;
+  const selection = window.getSelection();
+  const selectRange = selection!.getRangeAt(0);
+  const range = selectRange.cloneRange();
+
+  range.selectNodeContents(input as Node);
+  range.setStart(selectRange.endContainer, selectRange.endOffset);
+
+  return range.extractContents();
+}
+
+export function fragmentToHtml(fragment: any) {
+  const tmpDiv = document.createElement('div');
+
+  tmpDiv.appendChild(fragment);
+
+  return tmpDiv.innerHTML;
+}
+
+export function getHTML(el: HTMLElement) {
+  return el.innerHTML.replace('<br>', ' ').trim();
+}
+
+export function moveCaret(element: HTMLElement, toStart = false, offset: number | undefined = undefined) {
+  const range = document.createRange();
+  const selection = window.getSelection();
+
+  range.selectNodeContents(element);
+
+  if (offset !== undefined) {
+    range.setStart(element, offset);
+    range.setEnd(element, offset);
+  }
+
+  range.collapse(toStart);
+
+  selection!.removeAllRanges();
+  selection!.addRange(range);
+}

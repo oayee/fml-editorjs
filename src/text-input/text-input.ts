@@ -12,13 +12,6 @@ export default class TextInput implements BlockTool {
     };
   }
 
-  static get conversionConfig() {
-    return {
-      export: 'text', // to convert Paragraph to other block, use 'text' property of saved data
-      import: 'text' // to covert other block's exported string to Paragraph, fill 'text' property of tool data
-    };
-  }
-
   constructor({ data }: any) {
     this.data = data || {};
   }
